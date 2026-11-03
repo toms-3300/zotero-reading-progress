@@ -1,0 +1,28 @@
+/* All selectors are limited to plugin-marked title cells. */
+.rp-title-cell > .cell-text { flex: 1 1 auto !important; min-width: 0 !important; }
+.rp-title-cell > .rp-stage {
+  appearance: auto;
+  box-sizing: border-box;
+  flex: 0 0 86px;
+  width: 86px;
+  min-width: 86px;
+  max-width: 86px;
+  height: 23px;
+  margin-inline: 9px 6px;
+  padding: 0 3px;
+  align-self: center;
+  border: 1px solid light-dark(#c9c9c9, #666);
+  border-radius: 4px;
+  background: light-dark(#fafafa, #303030);
+  color: light-dark(#505050, #eee);
+  font: 12px "Segoe UI", "Microsoft YaHei", sans-serif;
+  line-height: normal;
+  pointer-events: auto;
+  cursor: default;
+}
+.rp-title-cell > .rp-stage[data-stage="1"] { color:light-dark(#174e93,#bed8ff); background:light-dark(#edf4ff,#293c56); }
+.rp-title-cell > .rp-stage[data-stage="2"] { color:light-dark(#6a358e,#e5c6ff); background:light-dark(#f5eefa,#493058); }
+.rp-title-cell > .rp-stage[data-stage="3"] { color:light-dark(#24623e,#bfeccc); background:light-dark(#edf7f0,#2b4936); }
+.rp-stage option { color:light-dark(#202020,#eee); background:light-dark(#fff,#303030); }
+.rp-stage:focus-visible { outline:2px solid light-dark(#245fc0,#9cc0ff); outline-offset:1px; }
+.rp-stage:disabled { opacity:0.65; }

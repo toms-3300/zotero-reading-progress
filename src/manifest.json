@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "文献阅读进度",
+  "version": "1.1.0",
+  "description": "在标题后显示未开始、已初读、已精读、已复现，并将已复现文献排在列表底部。",
+  "author": "Personal Research Tools",
+  "applications": {
+    "zotero": {
+      "id": "reading-progress@personal.local",
+      "update_url": "https://github.com/toms-3300/zotero-reading-progress/releases/latest/download/updates.json",
+      "strict_min_version": "10.0",
+      "strict_max_version": "10.0.*"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+.test-run/
+reference/
+__pycache__/
+dist/
+.DS_Store
+*.log
