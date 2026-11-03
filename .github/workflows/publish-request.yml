@@ -1,0 +1,38 @@
+name: Publish requested release
+on:
+  push:
+    branches: [main]
+    paths: ['.github/release-request.json']
+permissions:
+  contents: write
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: node --test tests/*.test.cjs
+      - run: python -m unittest discover -s tests -p 'test_*.py'
+      - name: Validate requested version and build
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from scripts.release import release
+          request = json.loads(Path('.github/release-request.json').read_text())
+          version = json.loads(Path('src/manifest.json').read_text())['version']
+          if request['version'] != version:
+              raise SystemExit('Requested version must match manifest')
+          release(os.environ['GITHUB_REPOSITORY'], 'v' + version)
+          with open(os.environ['GITHUB_ENV'], 'a') as output:
+              output.write('RELEASE_TAG=v' + version + '\n')
+          PY
+      - name: Create tag and publish assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$RELEASE_TAG" dist/*.xpi dist/updates.json --target "$GITHUB_SHA" --latest --title "文献阅读进度 $RELEASE_TAG" --generate-notes
